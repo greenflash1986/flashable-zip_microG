@@ -114,7 +114,7 @@ function generate_zip() {
   --quiet \
   --recurse-path $ZIP_NAME \
   $ZIP_FILES \
-  --exclude '*.asc' '*_index.xml' '*_config.txt' 'templates/*' '*.zip'
+  --exclude '*.asc' '*_index.xml' '*_config.txt' 'templates/*' '*.zip' '*.iml'
   echo "Result: $ZIP_NAME"
 }
 
@@ -126,11 +126,9 @@ apps_config | awk '{print $1}' | uniq | xargs -l bash -c 'download_repo_index $@
 echo "~~~ Downloading apps"
 apps_config | xargs -l bash -c 'download_app $@' -
 if [[ ${CONFIG_FILE} == *"with-gapps"* ]]; then
-  DL_PATH=system/${OVERLAY_PATH_ON_SYSTEM}
-  mkdir --parents $DL_PATH
   wget \
   --no-verbose \
-  --output-document=${DL_PATH}/${OVERLAY_FILENAME} \
+  --output-document=${OVERLAY_FILENAME} \
   https://github.com/greenflash1986/UnifiedNlpOverlay/releases/download/v0.1/UnifiedNlpOverlay.apk
 fi
 
