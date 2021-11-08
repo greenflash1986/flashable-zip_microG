@@ -25,7 +25,6 @@ WORK_FOLDER='microg'
 ZIP_FILE="$3"
 ADDOND='70-microg.sh'
 PRIVAPP_PERMISSIONS='privapp-permissions-microg.xml'
-UNIFIED_NLP_OVERLAY="UnifiedNlpOverlay.apk"
 SYSTEM_ROOT="/system"
 
 cd /tmp
@@ -94,14 +93,6 @@ echo -n -e 'ui_print Installing OTA survival script...\n' > /proc/self/fd/$2
 cp ${ADDOND} ${SYSTEM_ROOT}/addon.d/
 chmod 755 ${SYSTEM_ROOT}/addon.d/${ADDOND}
 echo -n -e 'ui_print Installed OTA survival script.\n' > /proc/self/fd/$2
-
-
-echo -n -e 'ui_print Installing Overlay...\n' > /proc/self/fd/$2
-UNIFIED_NLP_OVERLAY_PATH=${SYSTEM_ROOT}/vendor/overlay/
-mkdir -p ${UNIFIED_NLP_OVERLAY_PATH}
-chown root:shell ${UNIFIED_NLP_OVERLAY_PATH} && chmod 755 ${UNIFIED_NLP_OVERLAY_PATH}
-cp ${UNIFIED_NLP_OVERLAY} ${UNIFIED_NLP_OVERLAY_PATH}
-echo -n -e 'ui_print Installed Overlay.\n' > /proc/self/fd/$2
 
 
 if [ "${BUILD_VERSION_SDK_INT}" -ge 27 ]

@@ -126,9 +126,11 @@ apps_config | awk '{print $1}' | uniq | xargs -l bash -c 'download_repo_index $@
 echo "~~~ Downloading apps"
 apps_config | xargs -l bash -c 'download_app $@' -
 if [[ ${CONFIG_FILE} == *"with-gapps"* ]]; then
+  DL_PATH=system/${OVERLAY_PATH_ON_SYSTEM}
+  mkdir --parents $DL_PATH
   wget \
   --no-verbose \
-  --output-document=${OVERLAY_FILENAME} \
+  --output-document=${DL_PATH}/${OVERLAY_FILENAME} \
   https://github.com/greenflash1986/UnifiedNlpOverlay/releases/download/v0.1/UnifiedNlpOverlay.apk
 fi
 
